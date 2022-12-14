@@ -1,0 +1,40 @@
+# se reemplaza segun el ejercicio
+#Cup, Series, P, Montaje = 100,4,6400,800
+#Cup, Series, P, Montaje = 100,3,1600,300
+Cup, Series, P, Montaje = 100,3,1600,300
+
+
+#calculo de K y Fn+1(x(n))
+k= Montaje/Cup
+Fn1= P/Cup
+i=1
+e=Series
+
+# ciclo para el numero de etapas
+for i in range(Series):
+  
+  print("* Etapa",e,"\n")
+  e-=1
+  #instanciacion de variables
+  cond,j,aux,listaFn,listaXn=True,0,100,[],[]
+  # hallando Fn* y Xn*
+  while cond==True:
+    
+    Fn=j+k+((1/2)**j)*Fn1 #calcula Fn
+    listaFn.append(Fn)
+    listaXn.append(j)
+    print("F(",j,")=",j,"+",k,"+","(1/2)^",j,"*",Fn1," = ",Fn) #impresion de operaciones
+    if aux<Fn:
+      #Impresion tabla y conclusion
+      j-=1
+      a=[listaXn, listaFn]
+      print("\n_____________________________________________________\n       tabla\n_____________________________________________________\n")
+      print('\n'.join(['  '.join(['{:4}'.format(item) for item in row]) 
+              for row in a]))
+      print("\n\tFn*= ",aux,"       Xn*= ",j)
+      print("______________________________________________________\n\nproducir",j,"articulos , el costo minimo es ",aux,"\n")
+      cond=False
+    else:
+      j+=1
+      aux=Fn #asiganar Fn actual a varible auxiliar para comparar con Fn proximo
+  Fn1=aux #asigna Fn+1(X(n)) para la siguiente etapa
